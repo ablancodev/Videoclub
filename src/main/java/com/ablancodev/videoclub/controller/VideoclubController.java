@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ablancodev.videoclub.model.Movie;
@@ -21,9 +22,11 @@ public class VideoclubController {
 		return mav;
 	}
 
+	// .../movie?id=xx
 	@GetMapping( "/movie" )
-	public ModelAndView getMovie() {
+	public ModelAndView getMovie( @RequestParam( name="id", required=false, defaultValue="NULL" ) String id ) {
 		ModelAndView mav = new ModelAndView( "movie" );
+		mav.addObject( "idMovie", id );
 		return mav;
 	}
 
