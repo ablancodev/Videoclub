@@ -21,10 +21,16 @@ public class VideoclubController {
 		return mav;
 	}
 
+	@GetMapping( "/movie" )
+	public ModelAndView getMovie() {
+		ModelAndView mav = new ModelAndView( "movie" );
+		return mav;
+	}
+
 	private ArrayList<Movie> getRepositoryMovies() {
-		ArrayList<Movie> lista = new ArrayList<Movie>();
-		lista.add( new Movie( "La momia", "Esto es la momia", "/") );
-		lista.add( new Movie( "La momia", "Esto es la momia", "/") );
-		return lista;
+		ArrayList<Movie> movies = new ArrayList<Movie>();
+		movies.add( new Movie( "La momia", "Una película de una momia", "/images/momia.jpg" ) );
+		movies.add( new Movie( "Misión Imposible", "La primera de la saga de Tom.", "/images/mision.jpg" ) );
+		return movies;
 	}
 }
