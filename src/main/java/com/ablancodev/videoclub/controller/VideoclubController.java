@@ -18,6 +18,12 @@ import com.ablancodev.videoclub.model.Movie;
 @RequestMapping( "/" )
 public class VideoclubController {
 
+	// Vamos a redireccionar / a /movies
+	@GetMapping( "/" )
+	public String redirect() {
+		return "redirect:/movies";
+	}
+
 	@GetMapping( "/movies" )
 	public ModelAndView getMovies() {
 		ModelAndView mav = new ModelAndView( "movies" );
