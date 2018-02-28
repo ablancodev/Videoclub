@@ -5,7 +5,11 @@ public class Movie {
 	private String name;
 	private String description;
 	private String image;
-	
+
+	public Movie() {
+		
+	}
+
 	public Movie(String name, String description, String image) {
 		super();
 		this.name = name;

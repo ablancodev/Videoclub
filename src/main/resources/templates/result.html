@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Result adding movie</title>
+</head>
+<body>
+	<h1>Added !!</h1>
+	<h2>Movie: <span th:text="${movie.name}"></span></h2>
+	<p><span th:text="${movie.description}"></span></p>
+	<p><span th:text="${movie.image}"></span></p>
+	<img th:src="${movie.image}" />
+</body>
+</html>

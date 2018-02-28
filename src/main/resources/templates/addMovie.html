@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Movie</title>
+</head>
+<body>
+	<form action="#" th:action="@{/actionAddMovie}" th:object="${movie}" method="post">
+		<p>Nombre:<input type="text" th:field="*{name}" /></p>
+		<p>Descripción:<input type="text" th:field="*{description}" /></p>
+		<p>Imagen: <input type="text" th:field="*{image}" /></p>
+		<p><input type="submit" value="Enviar" /></p>
+	</form>
+</body>
+</html>
