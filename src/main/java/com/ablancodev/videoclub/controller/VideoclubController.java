@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +22,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ablancodev.videoclub.model.Movie;
+import com.ablancodev.videoclub.service.MoviesService;
 
 @Controller
 @RequestMapping( "/" )
 public class VideoclubController {
 
+	@Autowired
+	@Qualifier( "moviesService" )
+	private MoviesService moviesService;
 
 	// Vamos a redireccionar / a /movies
 	@GetMapping( "/" )
@@ -35,7 +41,7 @@ public class VideoclubController {
 	@GetMapping( "/movies" )
 	public ModelAndView getMovies() {
 		ModelAndView mav = new ModelAndView( "movies" );
-		ArrayList<Movie> listado = getRepositoryMovies();
+		ArrayList<Movie> listado = (ArrayList<Movie>) moviesService.getListMovies();
 		mav.addObject( "movies", listado);
 		return mav;
 	}
@@ -70,13 +76,6 @@ public class VideoclubController {
 		ModelAndView mav = new ModelAndView( "result" );
 		mav.addObject( "movie", movie );
 		return mav;
-	}
-
-	private ArrayList<Movie> getRepositoryMovies() {
-		ArrayList<Movie> movies = new ArrayList<Movie>();
-		movies.add( new Movie( "La momia", "Una película de una momia", "/images/momia.jpg" ) );
-		movies.add( new Movie( "Misión Imposible", "La primera de la saga de Tom.", "/images/mision.jpg" ) );
-		return movies;
 	}
 
 }
