@@ -1,4 +1,4 @@
-CREATE TABLE videoclub_movie (
+CREATE TABLE movie (
 	id BIGINT(20) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description LONGTEXT,
