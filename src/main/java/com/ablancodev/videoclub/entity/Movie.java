@@ -24,6 +24,10 @@ public class Movie {
 	@Column(name="image")
 	private String image;
 
+	public Movie() {
+		super();
+	}
+
 	public Movie(int id, String name, String description, String image) {
 		super();
 		this.id = id;

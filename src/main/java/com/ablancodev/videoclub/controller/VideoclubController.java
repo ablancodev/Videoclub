@@ -24,7 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ablancodev.videoclub.model.Movie;
+import com.ablancodev.videoclub.entity.Movie;
+import com.ablancodev.videoclub.repository.MovieJpaRepository;
 import com.ablancodev.videoclub.service.MoviesService;
 
 @Controller
@@ -35,6 +36,12 @@ public class VideoclubController {
 	@Qualifier( "moviesService" )
 	private MoviesService moviesService;
 
+	/*
+	@Autowired
+	@Qualifier( "movieJpaRepository" )
+	private MovieJpaRepository movieJpaRepository;
+	*/
+
 	// Vamos a redireccionar / a /movies
 	@GetMapping( "/" )
 	public String redirect() {
@@ -44,7 +51,7 @@ public class VideoclubController {
 	@GetMapping( "/movies" )
 	public ModelAndView getMovies() {
 		ModelAndView mav = new ModelAndView( "movies" );
-		ArrayList<Movie> listado = (ArrayList<Movie>) moviesService.getListMovies();
+		List<Movie> listado =  moviesService.listAllMovies();
 		mav.addObject( "movies", listado);
 		return mav;
 	}
@@ -69,7 +76,7 @@ public class VideoclubController {
 
 	@GetMapping( "/addMovie" )
 	public String addMovie( Model model ) {
-		model.addAttribute( "movie", new Movie() );
+	//	model.addAttribute( "movie", new Movie() );
 		return "addMovie";
 	}
 
@@ -79,7 +86,7 @@ public class VideoclubController {
 		if ( bindingResult.hasErrors() ) {
 			mav = new ModelAndView( "addMovie" );
 		} else {
-			// Aqui procesaríamos al objeto movie que nos manda el formulario, lo añadiríamos a base de datos o lo que necesitemos con esos datos.
+			moviesService.addMovie( movie );
 			mav = new ModelAndView( "result" );
 			mav.addObject( "movie", movie );
 		}
