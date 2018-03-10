@@ -76,7 +76,7 @@ public class VideoclubController {
 
 	@GetMapping( "/addMovie" )
 	public String addMovie( Model model ) {
-	//	model.addAttribute( "movie", new Movie() );
+		model.addAttribute( "movie", new Movie() );
 		return "addMovie";
 	}
 
