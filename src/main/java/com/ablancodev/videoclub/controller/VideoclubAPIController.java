@@ -2,9 +2,12 @@ package com.ablancodev.videoclub.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,13 +16,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ablancodev.videoclub.model.Movie;
+import com.ablancodev.videoclub.entity.Movie;
+import com.ablancodev.videoclub.service.MoviesService;
 
 @RestController
 @RequestMapping( "/api" )
 public class VideoclubAPIController {
 
-	// Vamos a redireccionar / a /movies
+	@Autowired
+	@Qualifier( "moviesService" )
+	private MoviesService moviesService;
+
 	@GetMapping( "" )
 	public void redirect(HttpServletResponse response) throws IOException {
 	    response.sendRedirect("/api/");
@@ -27,11 +34,9 @@ public class VideoclubAPIController {
 
 	@GetMapping( "/" )
 	public ArrayList<Movie> getMovies() {
-		ArrayList<Movie> movies = new ArrayList<Movie>();
-		movies.add( new Movie( "La momia", "Una película de una momia", "/images/momia.jpg" ) );
-		movies.add( new Movie( "Misión Imposible", "La primera de la saga de Tom.", "/images/mision.jpg" ) );
+		List<Movie> movies =  moviesService.listAllMovies();
 
-		return movies;
+		return (ArrayList<Movie>) movies;
 	}
 
 }
